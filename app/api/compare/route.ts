@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
   try {
       const res = await fetch(
-        `http://localhost:8000/api/compare?period=${period}`,
+        `https://regim.up.railway.app/api/compare?period=${period}`,
         { cache: "no-store", signal: AbortSignal.timeout(240000) }
       );
 

@@ -11,7 +11,7 @@ export async function GET(request: Request) {
 
   try {
     const res = await fetch(
-      `http://localhost:8000/api/backtest/${ticker}?period=${period}`,
+      `https://regim.up.railway.app/api/backtest/${ticker}?period=${period}`,
       { cache: "no-store" }
     );
     const data = await res.json();

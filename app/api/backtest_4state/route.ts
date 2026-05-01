@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   if (cached) return Response.json(cached);
   
   try {
-    const res  = await fetch(`http://localhost:8000/api/backtest_4state/${ticker}?period=${period}`, { cache: "no-store" });
+    const res  = await fetch(`https://regim.up.railway.app/api/backtest_4state/${ticker}?period=${period}`, { cache: "no-store" });
     const data = await res.json();
     setCached(key, data, 30 * 60 * 1000);
     return Response.json(data);

@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       key,
       async () => {
         const res = await fetch(
-          `http://localhost:8000/api/outcome/${ticker}?period=${period}`,
+          `https://regim.up.railway.app/api/outcome/${ticker}?period=${period}`,
           { cache: "no-store" }
         );
         if (!res.ok) {

@@ -1,7 +1,6 @@
-# Regim — Market Regime Detection & Optimal Execution Research System
-
+# Regim
 > A quantitative finance research platform studying whether market regime signals
-> can improve trade execution — and the conditions under which they fail.
+> can improve trade execution, and the conditions under which they fail.
 
 **Live demo:** [regim.vercel.app](https://regim.vercel.app) &nbsp;·&nbsp;
 **Findings:** [regim.vercel.app/findings](https://regim.vercel.app/findings) &nbsp;·&nbsp;
@@ -18,15 +17,15 @@ Institutional traders adapt execution strategy to market regimes: buy aggressive
 
 This system investigates both on real market data across 8 asset classes. The answers are not what the simulation literature predicts.
 
-**On question 1:** PPO agents cannot reliably learn regime-aware execution. Training converges to qualitatively different policies across random seeds — sometimes producing *inverted* regime sensitivity, executing more aggressively in bear markets than bull. The failure is structural, not informational. Hard-coded regime conditioning bypasses an optimization problem that standard policy gradient methods cannot solve.
+**On question 1:** PPO agents cannot reliably learn regime-aware execution. Training converges to qualitatively different policies across random seeds, sometimes producing *inverted* regime sensitivity, executing more aggressively in bear markets than bull. The failure is structural, not informational. Hard-coded regime conditioning bypasses an optimization problem that standard policy gradient methods cannot solve.
 
-**On question 2:** HMM confidence signals *do* predict execution quality — but only after 3–10 day temporal aggregation. At daily resolution, no signal is informative for any asset. The regime-driven component of execution cost is obscured by single-day noise and only becomes detectable when averaged over multiple days, a threshold that aligns with empirical mean regime durations.
+**On question 2:** HMM confidence signals *do* predict execution quality, but only after 3–10 day temporal aggregation. At daily resolution, no signal is informative for any asset. The regime-driven component of execution cost is obscured by single-day noise and only becomes detectable when averaged over multiple days, a threshold that aligns with empirical mean regime durations.
 
 ---
 
 ## Eight Key Findings
 
-All reproducible from the live dashboard. Statistical tests: paired t-test, 1000-iteration permutation test, binomial test — Bonferroni corrected across simultaneous hypotheses.
+All reproducible from the live dashboard. Statistical tests: paired t-test, 1000-iteration permutation test, binomial test, Bonferroni corrected across simultaneous hypotheses.
 
 | # | Finding | Evidence |
 |---|---------|----------|
@@ -61,19 +60,19 @@ Live at [regim.vercel.app/dashboard](https://regim.vercel.app/dashboard). Suppor
 
 ### Dashboard Tabs
 
-**Live Regime** — Real-time 4-state HMM classification with regime probability chart, transition matrix, SHAP feature attribution (which features are driving the current classification), and forward-looking regime forecast across horizons up to 50+ days. Current regime, stay probability, switch probability, and expected duration derived from the fitted transition matrix — directly comparable to CTMSTOU calibrated rates.
+**Live Regime**: Real-time 4-state HMM classification with regime probability chart, transition matrix, SHAP feature attribution (which features are driving the current classification), and forward-looking regime forecast across horizons up to 50+ days. Current regime, stay probability, switch probability, and expected duration derived from the fitted transition matrix, directly comparable to CTMSTOU calibrated rates.
 
-**Backtest** — Walk-forward out-of-sample backtest comparing regime-aware execution against TWAP. Includes confidence threshold filter (only act on signals above a threshold; below → fall back to TWAP), regime direction accuracy, HMM vs 50/200 MA crossover comparison, transition zone analysis, annualized Sharpe ratios by regime, and full transaction cost breakdown (spread, temporary impact, permanent impact, timing).
+**Backtest**: Walk-forward out-of-sample backtest comparing regime-aware execution against TWAP. Includes confidence threshold filter (only act on signals above a threshold; below → fall back to TWAP), regime direction accuracy, HMM vs 50/200 MA crossover comparison, transition zone analysis, annualized Sharpe ratios by regime, and full transaction cost breakdown (spread, temporary impact, permanent impact, timing).
 
-**Paper vs Reality** — Places CTMSTOU simulation parameters directly against empirically learned HMM statistics for SPY. Side-by-side: mean return/day, volatility, momentum for paper bullish/bearish vs real SPY bullish/bearish/transitional. Execution cost comparison: paper's WAP 0.9949 (regime rule) vs 1.0277 (TWAP) against real SPY backtest results.
+**Paper vs Reality**: Places CTMSTOU simulation parameters directly against empirically learned HMM statistics for SPY. Side-by-side: mean return/day, volatility, momentum for paper bullish/bearish vs real SPY bullish/bearish/transitional. Execution cost comparison: paper's WAP 0.9949 (regime rule) vs 1.0277 (TWAP) against real SPY backtest results.
 
-**Comparison** — Cross-asset regime structure comparison. Select any 2 assets; dashboard shows regime switches, switches/month, avg regime duration, % time in each state, vol by regime, and regime persistence bars across all 8 assets — directly illustrating why the paper finds asset-class-heterogeneous results.
+**Comparison**: Cross-asset regime structure comparison. Select any 2 assets; dashboard shows regime switches, switches/month, avg regime duration, % time in each state, vol by regime, and regime persistence bars across all 8 assets: directly illustrating why the paper finds asset-class-heterogeneous results.
 
-**Intraday Sim** — Order sliced into 6 hourly tranches. Regime-aware intraday weights (front-load in bullish, back-load in bearish) vs VWAP benchmark. Mean IS improvement −0.154% (95% CI [−0.183, −0.127], CI excludes zero — statistically significant). 1220 fills across 6 hourly slices/day.
+**Intraday Sim**: Order sliced into 6 hourly tranches. Regime-aware intraday weights (front-load in bullish, back-load in bearish) vs VWAP benchmark. Mean IS improvement −0.154% (95% CI [−0.183, −0.127], CI excludes zero, statistically significant). 1220 fills across 6 hourly slices/day.
 
-**Statistics** — Every p-value, confidence interval, and permutation result in one place. Execution cost improvement (paired t-test + bootstrap CI n=1000 + permutation test), regime direction accuracy (binomial test vs 50% baseline), HMM vs MA crossover comparison, regime stability and transition zone metrics. All derived from walk-forward OOS labels.
+**Statistics**: Every p-value, confidence interval, and permutation result in one place. Execution cost improvement (paired t-test + bootstrap CI n=1000 + permutation test), regime direction accuracy (binomial test vs 50% baseline), HMM vs MA crossover comparison, regime stability and transition zone metrics. All derived from walk-forward OOS labels.
 
-**Paper Trading** — Log simulated trades against live regime signals. Records ticker, regime, confidence, SHAP top driver, direction, price, outcome date. Calls `/api/outcome` for auto-resolution. Tracks whether HMM predictions hold out-of-sample over time.
+**Paper Trading**: Log simulated trades against live regime signals. Records ticker, regime, confidence, SHAP top driver, direction, price, outcome date. Calls `/api/outcome` for auto-resolution. Tracks whether HMM predictions hold out-of-sample over time.
 
 ---
 
@@ -111,7 +110,7 @@ vs HMM Viterbi            Regime-conditional                           │
             7 analysis tabs
 ```
 
-**Regime detection:** 4-state Gaussian HMM (crash / bearish / transitional / bullish) fitted on 6 price-volume features. States ordered by return-volatility score (φᵢ = μᵣ + μᵧ) for consistent cross-asset labeling. Crash distinguished from bearish by volatility — the two lowest-scoring states — since crash vol is 1.3–2× higher with completely different execution implications. BIC selects between full and diagonal covariance per asset. 40 random seeds with best-scoring model that passes 3% minimum state occupancy.
+**Regime detection:** 4-state Gaussian HMM (crash / bearish / transitional / bullish) fitted on 6 price-volume features. States ordered by return-volatility score (φᵢ = μᵣ + μᵧ) for consistent cross-asset labeling. Crash distinguished from bearish by volatility, the two lowest-scoring states, since crash vol is 1.3–2× higher with completely different execution implications. BIC selects between full and diagonal covariance per asset. 40 random seeds with best-scoring model that passes 3% minimum state occupancy.
 
 **Execution model:** Walk-forward OOS backtest with one-day signal lag (prior day's regime used for next-day execution). Crash → halt/minimum size. Bearish/Transitional → patient limit orders (midpoint of open and prior close). Bullish → aggressive, use open (same as TWAP). Implementation shortfall vs TWAP as primary cost metric.
 
@@ -220,12 +219,12 @@ python seed_robustness_test.py  # Bootstrap stability (n=1000)
 
 | Role | Citation |
 |------|----------|
-| Primary (validated & extended) | Amrouni et al. (2022) — CTMSTOU simulation framework |
-| Execution model | Almgren & Chriss (2000) — Optimal execution of portfolio transactions |
-| Changepoint detection | Killick, Fearnhead & Eckley (2012) — PELT algorithm |
-| Explainability | Lundberg & Lee (2017) — SHAP |
-| HMM foundation | Hamilton (1989) — Markov-switching models |
-| Execution cost metric | Perold (1988) — Implementation shortfall |
+| Primary (validated & extended) | Amrouni et al. (2022), CTMSTOU simulation framework |
+| Execution model | Almgren & Chriss (2000), Optimal execution of portfolio transactions |
+| Changepoint detection | Killick, Fearnhead & Eckley (2012), PELT algorithm |
+| Explainability | Lundberg & Lee (2017), SHAP |
+| HMM foundation | Hamilton (1989), Markov-switching models |
+| Execution cost metric | Perold (1988), Implementation shortfall |
 
 ---
 

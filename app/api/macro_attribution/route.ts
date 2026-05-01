@@ -12,7 +12,7 @@ export async function GET(request: Request) {
       key,
       async () => {
         const res = await fetch(
-          `http://localhost:8000/api/macro_attribution?ticker=${ticker}&period=${period}&api_key=${process.env.FRED_API_KEY}`,
+          `https://regim.up.railway.app/api/macro_attribution?ticker=${ticker}&period=${period}&api_key=${process.env.FRED_API_KEY}`,
           { cache: "no-store" }
         );
         if (!res.ok) throw new Error(`Backend ${res.status}`);
