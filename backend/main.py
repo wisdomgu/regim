@@ -617,7 +617,7 @@ def get_transaction_costs(ticker: str = "SPY", period: str = "1y"):
 def compare_regimes(period: str = "6mo"):
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
-    ALL_TICKERS = ["SPY", "QQQ", "IWM", "BTC-USD", "ETH-USD", "GLD", "TLT", "AAPL"]
+    ALL_TICKERS = ["SPY", "QQQ", "IWM", "BTC", "ETH", "GLD", "TLT", "AAPL"]
 
     def process_ticker(ticker):
         try:
