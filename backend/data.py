@@ -32,7 +32,7 @@ def fetch_crypto(symbol: str = "BTC/USDT", days: int = 365) -> pd.DataFrame:
     return df
 
 def fetch_intraday(ticker: str, days: int = 90) -> pd.DataFrame:
-    crypto_tickers = {"BTC-USD", "ETH-USD", "BTC/USDT", "ETH/USDT"}
+    crypto_tickers = {"BTC", "ETH", "BTC/USDT", "ETH/USDT"}
     
     if ticker.upper() in crypto_tickers:
         yf_symbol = ticker.upper().replace("/USDT", "-USD").replace("/", "-")
@@ -57,7 +57,7 @@ def fetch_intraday(ticker: str, days: int = 90) -> pd.DataFrame:
     return df
 
 def fetch_data(ticker: str = "SPY", period: str = "1y", interval: str = "1d") -> pd.DataFrame:
-    crypto_tickers = {"BTC-USD", "ETH-USD", "BTC/USDT", "ETH/USDT"}
+    crypto_tickers = {"BTC", "ETH", "BTC/USDT", "ETH/USDT"}
     if ticker.upper() in crypto_tickers:
         yf_symbol = ticker.upper().replace("/USDT", "-USD").replace("/", "-")
         days = {"3mo": 90, "6mo": 180, "1y": 365, "2y": 730}.get(period, 365)
