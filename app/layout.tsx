@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Haha stonks go brr",
+  title: "Regim",
   description: "Market Microstructure & Optimal Execution Research System",
 };
 
