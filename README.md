@@ -2,8 +2,8 @@
 > A quantitative finance research platform studying whether market regime signals
 > can improve trade execution, and the conditions under which they fail.
 
-**Live demo:** [regim.vercel.app](https://regim-dashboard.vercel.app) &nbsp;·&nbsp;
-**Findings:** [regim.vercel.app/findings](https://regim-dashboard.vercel.app/findings) &nbsp;·&nbsp;
+**Live demo:** [regim-dashboard.vercel.app](https://regim-dashboard.vercel.app) &nbsp;·&nbsp;
+**Findings:** [regim-dashboard.vercel.app/findings](https://regim-dashboard.vercel.app/findings) &nbsp;·&nbsp;
 **Companion paper (SSRN, forthcoming):** *Temporal Aggregation Reveals HMM Regime Uncertainty Signals in Optimal Trade Execution*
 
 ---
