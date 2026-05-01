@@ -69,9 +69,10 @@ function computeAvgCosts(fills: Fill[]) {
 export default function IntradayChart({ fills, summary, regime_breakdown}: Props) {
   if (!summary || !fills) {
     return (
-      <div className="flex items-center justify-center h-64 text-gray-400">
-        Loading intraday simulation...
-      </div>
+    <div className="loading flex flex-col items-center justify-center gap-3 py-10 text-slate-500">
+      <div className="w-6 h-6 rounded-full border-2 border-slate-600 border-t-slate-300 animate-spin" />
+      <p className="text-xs">Computing Intraday Simulation...</p>
+    </div>
     );
   }
 
