@@ -115,7 +115,7 @@ export default function Home() {
     trade:     "idle",
   });
 
-  const [compareTickers, setCompareTickers] = useState<string[]>(["SPY", "BTC-USD"]);
+  const [compareTickers, setCompareTickers] = useState<string[]>(["SPY", "BTC"]);
 
   const cache = useRef<Record<string, any>>({});
 
