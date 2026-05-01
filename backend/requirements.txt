@@ -6,7 +6,7 @@ python-dotenv==1.0.1
 
 # Data fetching
 yfinance==1.2.0
-ccxt==4.3.99
+ccxt==4.3.98
 requests==2.33.1
 pandas==2.2.3
 numpy==2.0.2
