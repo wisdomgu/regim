@@ -8,21 +8,6 @@
 
 ---
 
-## The Research Question
-
-Institutional traders adapt execution strategy to market regimes: buy aggressively when prices are trending up, use patient limit orders when they're falling. Hidden Markov Models are the standard tool for detecting these regimes. Two empirical questions have gone unanswered:
-
-1. **Can reinforcement learning agents learn to exploit regime signals?**
-2. **Do HMM confidence scores actually predict execution quality on real assets?**
-
-This system investigates both on real market data across 8 asset classes. The answers are not what the simulation literature predicts.
-
-**On question 1:** PPO agents cannot reliably learn regime-aware execution. Training converges to qualitatively different policies across random seeds, sometimes producing *inverted* regime sensitivity, executing more aggressively in bear markets than bull. The failure is structural, not informational. Hard-coded regime conditioning bypasses an optimization problem that standard policy gradient methods cannot solve.
-
-**On question 2:** HMM confidence signals *do* predict execution quality, but only after 3–10 day temporal aggregation. At daily resolution, no signal is informative for any asset. The regime-driven component of execution cost is obscured by single-day noise and only becomes detectable when averaged over multiple days, a threshold that aligns with empirical mean regime durations.
-
----
-
 ## Eight Key Findings
 
 All reproducible from the live dashboard. Statistical tests: paired t-test, 1000-iteration permutation test, binomial test, Bonferroni corrected across simultaneous hypotheses.
@@ -140,32 +125,6 @@ All endpoints accept `ticker` and `period` query params. Responses are cached.
 
 ---
 
-## Research Paper
-
-The `research/` directory contains the full analysis pipeline for the companion paper: *Temporal Aggregation Reveals HMM Regime Uncertainty Signals in Optimal Trade Execution* (SSRN forthcoming).
-
-```
-research/
-├── analysis_core.py          # Core HMM fitting and signal computation
-├── data_collector.py         # Cross-asset data collection (8 assets)
-├── rolling_window_test.py    # Multi-horizon Spearman correlation tests
-├── alt_execution_test.py     # Alternative execution model sensitivity
-├── seed_robustness_test.py   # Bootstrap stability (1000 resamples)
-├── run_analysis.py           # Main pipeline entry point
-├── report.py                 # Results table generation
-├── plotting.py               # Figure generation (Figures 1 & 2)
-├── test.py                   # Unit tests
-├── data/                     # Cached OHLCV data
-├── figures/                  # Generated plots
-└── results/                  # Output tables
-```
-
-Key results: At 10-day aggregation, raw posterior entropy predicts execution quality for equity indices (IWM ρ = −0.454, SPY ρ = −0.166); regime stay probability predicts for cryptocurrency (BTC ρ = −0.155). Bootstrap stability: 98.8–100% of 1000 resamples produce the expected sign for all three primary findings. Daily-resolution signals are uninformative for all 8 assets.
-
-**Note:** The `research/` scripts share feature engineering logic with `backend/regime.py` but are self-contained and do not import from the backend at runtime. They can be run independently.
-
----
-
 ## Stack
 
 | Layer | Technology | Purpose |
@@ -214,18 +173,3 @@ python seed_robustness_test.py  # Bootstrap stability (n=1000)
 ```
 
 ---
-
-## Paper References
-
-| Role | Citation |
-|------|----------|
-| Primary (validated & extended) | Amrouni et al. (2022), CTMSTOU simulation framework |
-| Execution model | Almgren & Chriss (2000), Optimal execution of portfolio transactions |
-| Changepoint detection | Killick, Fearnhead & Eckley (2012), PELT algorithm |
-| Explainability | Lundberg & Lee (2017), SHAP |
-| HMM foundation | Hamilton (1989), Markov-switching models |
-| Execution cost metric | Perold (1988), Implementation shortfall |
-
----
-
-*Built by Satish Garg*
