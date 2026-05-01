@@ -74,7 +74,7 @@ Yahoo Finance (yfinance)
   4-state Gaussian HMM                                         FRED API integration
   BIC covariance selection                                     Logistic regression
   40 random seeds                                              VIX / yield curve / CPI
-  min 3% state occupancy                                              │
+  min 3% state occupancy                                               │
         │                                                              │
    ┌────┴────────────────────────┐                                     │
    ▼                             ▼                                     │
