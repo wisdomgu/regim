@@ -136,7 +136,7 @@ export default function Home() {
     setTabLoad("dashboard", "loading");
     try {
       const key = cacheKey("regime", t, p);
-      const regimeData = await cachedFetch(`../api/regime?ticker=${t}&period=${p}`, key);
+      const regimeData = await cachedFetch(`/api/regime?ticker=${t}&period=${p}`, key);
       if (!regimeData?.prices) throw new Error("Invalid regime data");
       regimeData.prices = regimeData.prices.map((row: any) => ({
         ...row,
@@ -156,7 +156,7 @@ export default function Home() {
     setTabLoad("backtest", "loading");
     try {
       const key = cacheKey("backtest", t, p);
-      const backtestData = await cachedFetch(`../api/backtest?ticker=${t}&period=${p}`, key);
+      const backtestData = await cachedFetch(`/api/backtest?ticker=${t}&period=${p}`, key);
       if (!backtestData?.summary || !backtestData?.daily) throw new Error("Invalid backtest data");
       setBacktest(backtestData);
       setTabLoad("backtest", "done");
@@ -174,7 +174,7 @@ export default function Home() {
     setTabLoad("compare", "loading");
     try {
       const key = cacheKey("compare", "all", p);
-      const compareD = await cachedFetch(`../api/compare?period=${p}`, key);
+      const compareD = await cachedFetch(`/api/compare?period=${p}`, key);
       setCompare(compareD);
       setTabLoad("compare", "done");
     } catch (e) {
@@ -189,7 +189,7 @@ export default function Home() {
     setTabLoad("intraday", "loading");
     try {
       const key = cacheKey("intraday", t, p);
-      const intradayData = await cachedFetch(`../api/intraday_backtest?ticker=${t}&period=${p}`, key);
+      const intradayData = await cachedFetch(`/api/intraday_backtest?ticker=${t}&period=${p}`, key);
       if (intradayData?.summary && intradayData?.fills) {
         setIntradayBacktest(intradayData);
       } else {
