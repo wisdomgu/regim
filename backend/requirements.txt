@@ -1,0 +1,27 @@
+# Core API
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.8.0
+python-dotenv==1.0.1
+
+# Data fetching
+yfinance==1.2.0
+ccxt==4.3.99
+requests==2.33.1
+pandas==2.2.3
+numpy==2.0.2
+
+# Machine learning / HMM
+hmmlearn==0.3.3
+scikit-learn==1.5.2
+scipy==1.14.1
+
+# Finance-specific
+arch==7.1.0
+ruptures==1.1.9
+fredapi==0.5.2
+shap==0.46.0
+
+# Utilities
+python-dateutil==2.9.0.post0
+pytz==2024.1
