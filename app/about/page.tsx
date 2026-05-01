@@ -24,7 +24,7 @@ export default function Home() {
                 <a href="dashboard">dashboard</a>
               </div>
               <div className="nav-items">
-                <a href="">github</a>
+                <a href="https://github.com/wisdomgu/regim">github</a>
                 <a href="findings">findings</a>
               </div>
               <div className="nav-items">

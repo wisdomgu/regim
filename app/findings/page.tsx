@@ -105,8 +105,7 @@ export default function Research() {
                 <a href="dashboard">dashboard</a>
               </div>
               <div className="nav-items">
-                <a href="">github</a>
-                <a href="">research</a>
+                <a href="https://github.com/wisdomgu/regim">github</a>
               </div>
               <div className="nav-items">
                 <p>built by satish garg</p>
