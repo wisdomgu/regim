@@ -63,7 +63,7 @@ function RegimeChart({ asset, data }: { asset: string; data: AssetData }) {
     })
   }
 
-  const isCrypto = asset === "BTC-USD"
+  const isCrypto = asset === "BTC"
   const priceFormatter = isCrypto
     ? (v: any) => `$${(v / 1000).toFixed(0)}k`
     : (v: any) => `$${v}`
@@ -132,8 +132,8 @@ function PersistenceChart({ data }: { data: Record<string, AssetData> }) {
     "SPY":     "#60a5fa",
     "QQQ":     "#818cf8",
     "IWM":     "#a78bfa",
-    "BTC-USD": "#f59e0b",
-    "ETH-USD": "#fb923c",
+    "BTC": "#f59e0b",
+    "ETH": "#fb923c",
     "GLD":     "#fbbf24",
     "TLT":     "#34d399",
     "AAPL":    "#f472b6",
