@@ -615,28 +615,26 @@ def get_transaction_costs(ticker: str = "SPY", period: str = "1y"):
 
 @app.get("/api/compare")
 def compare_regimes(period: str = "6mo"):
-    ALL_TICKERS = ["SPY", "QQQ", "IWM", "BTC-USD", "ETH-USD", "GLD", "TLT", "AAPL"]
-    results = {}
+    from concurrent.futures import ThreadPoolExecutor, as_completed
 
-    for ticker in ALL_TICKERS:
+    ALL_TICKERS = ["SPY", "QQQ", "IWM", "BTC-USD", "ETH-USD", "GLD", "TLT", "AAPL"]
+
+    def process_ticker(ticker):
         try:
             df = fetch_data(ticker, period)
             if df.empty or len(df) < 30:
-                results[ticker] = {"error": "Not enough data"}
-                continue
+                return ticker, {"error": "Not enough data"}
 
             df = flatten_columns(df)
 
             required = ["Open", "High", "Low", "Close", "Volume"]
             missing = [c for c in required if c not in df.columns]
             if missing:
-                results[ticker] = {"error": f"Missing columns: {missing}"}
-                continue
+                return ticker, {"error": f"Missing columns: {missing}"}
 
             states, confidence, model, scaler, df = fit_hmm_4state(df)
             if states is None or model is None:
-                results[ticker] = {"error": "HMM fit failed"}
-                continue
+                return ticker, {"error": "HMM fit failed"}
 
             states = smooth_regimes(states, min_duration=3)
             df["regime"] = states
@@ -666,20 +664,27 @@ def compare_regimes(period: str = "6mo"):
                 if not np.isnan(float(row["Close"]))
             ]
 
-            results[ticker] = {
-                "n_days":            n,
-                "n_switches":        switches,
-                "avg_duration_days": round(safe_float(n / (switches + 1)), 1),
+            return ticker, {
+                "n_days":             n,
+                "n_switches":         switches,
+                "avg_duration_days":  round(safe_float(n / (switches + 1)), 1),
                 "switches_per_month": round(safe_float(switches / (n / 21)), 2),
-                "regime_stats":      regime_stats,
-                "prices":            prices,
+                "regime_stats":       regime_stats,
+                "prices":             prices,
             }
 
         except Exception as e:
             traceback.print_exc()
+            return ticker, {"error": str(e)}
+
+    results = {}
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = {executor.submit(process_ticker, t): t for t in ALL_TICKERS}
+        for future in as_completed(futures):
+            ticker, result = future.result()
+            results[ticker] = result
 
     return results
-    
 
 @app.get("/api/shap/{ticker}")
 def get_shap_explanation(ticker: str = "SPY", period: str = "1y", n_days: int = 1):
@@ -687,11 +692,11 @@ def get_shap_explanation(ticker: str = "SPY", period: str = "1y", n_days: int = 
     Return SHAP feature attributions for the most recent n_days regime classifications.
 
     Response shape:
-      shap_values[day][feature][state] — contribution of feature to P(state) for that day
-      features_today[day][feature]     — raw feature values
-      base_values[state]               — expected P(state) across background
-      predicted_state                  — ordered state (0=crash .. 3=bullish)
-      state_probs[state]               — posterior P(state) for latest day
+      shap_values[day][feature][state] - contribution of feature to P(state) for that day
+      features_today[day][feature]     - raw feature values
+      base_values[state]               - expected P(state) across background
+      predicted_state                  - ordered state (0=crash .. 3=bullish)
+      state_probs[state]               - posterior P(state) for latest day
     """
     try:
         df = flatten_columns(fetch_data(ticker, period))
@@ -700,7 +705,7 @@ def get_shap_explanation(ticker: str = "SPY", period: str = "1y", n_days: int = 
 
         states, confidence, model, scaler, df = fit_hmm_4state(df)
         if model is None or scaler is None:
-            raise HTTPException(status_code=500, detail="HMM fit failed — cannot run SHAP")
+            raise HTTPException(status_code=500, detail="HMM fit failed - cannot run SHAP")
 
         df["returns"]    = df["Close"].pct_change()
         df["volatility"] = df["returns"].rolling(10).std()
@@ -783,7 +788,7 @@ def get_snapshot(ticker: str = "SPY", period: str = "1y"):
     """
     Fast endpoint for paper trading tab.
     Returns: regime, confidence, latest price, SHAP top driver.
-    Uses cached HMM — <1s after first call, ~5s cold (SHAP).
+    Uses cached HMM - <1s after first call, ~5s cold (SHAP).
     """
     try:
         result = _get_cached_fit(ticker, period)
@@ -801,7 +806,7 @@ def get_snapshot(ticker: str = "SPY", period: str = "1y"):
         latest_date    = str(df.index[-1].date())
         rec            = get_recommendation_4state(current_regime)
 
-        top_driver = "—"
+        top_driver = "-"
         try:
             df2 = df.copy()
             df2["returns"]     = df2["Close"].pct_change()
@@ -870,7 +875,7 @@ def get_outcome(ticker: str = "SPY", period: str = "1y"):
     """
     Lightweight outcome check for paper trading.
     Returns only: current regime, regime label, latest price.
-    Uses cached HMM — no backtest, no permutation tests.
+    Uses cached HMM - no backtest, no permutation tests.
     """
     try:
         result = _get_cached_fit(ticker, period)

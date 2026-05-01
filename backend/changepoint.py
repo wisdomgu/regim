@@ -46,7 +46,7 @@ def detect_changepoints(
     Returns
     -------
     dict with:
-      changepoint_indices  : list[int] — indices in returns array
+      changepoint_indices  : list[int] - indices in returns array
       n_changepoints       : int
       penalty_used         : float
     """
@@ -85,7 +85,7 @@ def compute_changepoint_probabilities(
     Rolling Bayesian changepoint probability using CUSUM-style evidence.
 
     For each point t, computes P(changepoint in last `window` days)
-    by comparing pre/post window variance — a lightweight Bayesian
+    by comparing pre/post window variance - a lightweight Bayesian
     approximation when full MCMC is too slow for a web endpoint.
 
     Returns array of shape (len(returns),) with probabilities in [0, 1].
@@ -167,8 +167,8 @@ def build_detection_lag_table(
         post_vol = float(np.std(returns[cp_idx: min(len(returns), cp_idx + 10)]) * np.sqrt(252))
 
         rows.append({
-            "cp_date":      dates[cp_idx] if cp_idx < len(dates) else "—",
-            "hmm_date":     dates[nearest_sw] if nearest_sw < len(dates) else "—",
+            "cp_date":      dates[cp_idx] if cp_idx < len(dates) else "-",
+            "hmm_date":     dates[nearest_sw] if nearest_sw < len(dates) else "-",
             "lag_days":     int(lag_days),
             "from_regime":  from_regime,
             "to_regime":    to_regime,

@@ -65,7 +65,7 @@ def fetch_crypto(symbol: str = "BTC/USDT", days: int = 365) -> pd.DataFrame:
     return df
 
 def fetch_data(ticker: str = "SPY", period: str = "1y", interval: str = "1d") -> pd.DataFrame:
-    """Unified fetch — routes to equity or crypto based on ticker format."""
+    """Unified fetch - routes to equity or crypto based on ticker format."""
     crypto_tickers = {"BTC-USD", "ETH-USD", "BTC/USDT", "ETH/USDT"}
     if ticker.upper() in crypto_tickers:
         symbol = ticker.upper().replace("-", "/")

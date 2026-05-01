@@ -6,7 +6,7 @@ to macro drivers via logistic regression + correlation analysis.
 
 Key research claim:
   "Crash regimes occur when unemployment rises >Xpp/month AND
-   VIX >Y with Z% precision — connecting statistical regimes
+   VIX >Y with Z% precision - connecting statistical regimes
    to real economic fundamentals."
 """
 
@@ -74,7 +74,7 @@ def fetch_fred_data(
             print(f"[macro] FRED fetch failed for {series_id}: {e}")
 
     if not frames:
-        raise RuntimeError("All FRED fetches failed — check API key")
+        raise RuntimeError("All FRED fetches failed - check API key")
 
     df = pd.DataFrame(frames)
     df.index = pd.to_datetime(df.index)
@@ -224,7 +224,7 @@ def fit_macro_logistic(merged: pd.DataFrame) -> dict:
             "recall":       recall,
             "n_crash_days": int(y_crash.sum()),
             "n_total_days": int(len(y_crash)),
-            "top_predictor": list(sorted_coefs.keys())[0] if sorted_coefs else "—",
+            "top_predictor": list(sorted_coefs.keys())[0] if sorted_coefs else "-",
         }
 
     except ImportError:
@@ -249,8 +249,8 @@ def fit_macro_logistic(merged: pd.DataFrame) -> dict:
             "recall":       None,
             "n_crash_days": int((merged["regime"] == 0).sum()),
             "n_total_days": int(len(merged)),
-            "top_predictor": list(sorted_coefs.keys())[0] if sorted_coefs else "—",
-            "note":         "sklearn unavailable — correlation coefficients shown",
+            "top_predictor": list(sorted_coefs.keys())[0] if sorted_coefs else "-",
+            "note":         "sklearn unavailable - correlation coefficients shown",
         }
     except Exception as e:
         return {"fitted": False, "reason": str(e)}
@@ -316,7 +316,7 @@ def run_macro_attribution(
     feat_label = FRED_SERIES.get(top_corr_feat, (None, top_corr_feat))[1]
     finding = (
         f"'{feat_label}' shows strongest correlation with regime (ρ={top_corr_val}). "
-        f"Crash precision: {logistic.get('precision', '—')}. "
+        f"Crash precision: {logistic.get('precision', '-')}. "
         if logistic.get("fitted") else
         f"'{feat_label}' shows strongest correlation with regime (ρ={top_corr_val})."
     )

@@ -63,17 +63,8 @@ function getRegimeColor(regime: number): string {
 }
 
 export default function PriceChart({ prices }: Props) {
-  if (typeof window !== 'undefined' && prices?.length > 0) {
-    console.log('First 3 price points:', prices.slice(0, 3));
-    console.log('Regime values found:', [...new Set(prices.map(p => p.regime))]);
-  }
 
   const bands = getRegimeBands(prices);
-  
-  if (typeof window !== 'undefined') {
-    console.log('Generated bands:', bands.length);
-    console.log('Sample bands:', bands.slice(0, 3));
-  }
 
   const indexedPrices = prices.map((p, i) => ({
   ...p,

@@ -214,10 +214,7 @@ function StatRow({ label, spy, btc, highlight }: {
 }
 
 export default function ComparePanel({ data, period, tickers }: Props) {
-
-  console.log("ComparePanel data:", data)
-
-
+  
   if (tickers.length < 2) {
     return (
       <div className="text-gray-500 text-sm">

@@ -237,25 +237,25 @@ def get_recommendation_4state(state: int) -> dict:
         0: {
             "regime": "crash",
             "action": "Halt or minimum size only",
-            "detail": "Extreme volatility spike — spreads are 2-3x normal. Any execution is costly. Wait for stabilisation.",
+            "detail": "Extreme volatility spike - spreads are 2-3x normal. Any execution is costly. Wait for stabilisation.",
             "color":  "purple"
         },
         1: {
             "regime": "bearish",
             "action": "Use patient limit orders",
-            "detail": "Price is falling — let it come to you. Split into smaller tranches, avoid urgency.",
+            "detail": "Price is falling - let it come to you. Split into smaller tranches, avoid urgency.",
             "color":  "red"
         },
         2: {
             "regime": "transitional",
             "action": "Reduce size, use limits",
-            "detail": "High-volatility transitional regime — direction unclear. Minimise market impact, wait for confirmation.",
+            "detail": "High-volatility transitional regime - direction unclear. Minimise market impact, wait for confirmation.",
             "color":  "yellow"
         },
         3: {
             "regime": "bullish",
             "action": "Execute urgently",
-            "detail": "Price is rising — delay costs you. Use market orders or aggressive limits.",
+            "detail": "Price is rising - delay costs you. Use market orders or aggressive limits.",
             "color":  "green"
         }
     }
@@ -267,19 +267,19 @@ def get_recommendation(state: int) -> dict:
         0: {
             "regime": "bearish",
             "action": "Use patient limit orders",
-            "detail": "Price is falling — let it come to you. Split into smaller tranches, avoid urgency.",
+            "detail": "Price is falling - let it come to you. Split into smaller tranches, avoid urgency.",
             "color": "red"
         },
         1: {
             "regime": "transitional",
             "action": "Reduce size, use limits",
-            "detail": "High-volatility transitional regime — direction unclear. Minimise market impact, wait for confirmation.",
+            "detail": "High-volatility transitional regime - direction unclear. Minimise market impact, wait for confirmation.",
             "color": "yellow"
         },
         2: {
             "regime": "bullish",
             "action": "Execute urgently",
-            "detail": "Price is rising — delay costs you. Use market orders or aggressive limits.",
+            "detail": "Price is rising - delay costs you. Use market orders or aggressive limits.",
             "color": "green"
         }
     }
@@ -368,7 +368,7 @@ def _emission_proba(model: GaussianHMM, x: np.ndarray) -> np.ndarray:
     """
     Compute P(state | x_t) ∝ P(x_t | state) * P(state)
     using emission probabilities scaled by stationary prior.
-    This is the per-day, sequence-independent approximation —
+    This is the per-day, sequence-independent approximation -
     appropriate for SHAP since we want feature → regime attribution.
     """
     from scipy.stats import multivariate_normal
@@ -406,7 +406,7 @@ def explain_regime_shap(
     Args:
         model:        Fitted GaussianHMM from fit_hmm_4state
         scaler:       StandardScaler used during fit
-        features_df:  Raw (unscaled) feature DataFrame — last n_explain rows are explained
+        features_df:  Raw (unscaled) feature DataFrame - last n_explain rows are explained
         state_map:    model._state_map  {raw_state → ordered_state}
         n_background: Number of background samples for SHAP kernel
         n_explain:    How many recent days to explain (default 1 = today)
