@@ -1,9 +1,15 @@
 "use client";
 import LandingAnimation from "@/components/LandingAnimation";
 import { useEffect } from "react";
+import { trackEvent } from "@/lib/trackEvent";
 import gsap from "gsap";
 
 export default function Home() {
+  
+  useEffect(() => {
+    trackEvent({ tab: "landing" });
+  }, []);
+
 
   return (
     <main>
