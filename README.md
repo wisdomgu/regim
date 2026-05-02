@@ -164,14 +164,6 @@ npm run dev
 
 Open [localhost:3000](http://localhost:3000). The dashboard will connect to your local backend.
 
-**Research pipeline**
-```bash
-cd research
-pip install -r requirements.txt
-python run_analysis.py          # Full cross-asset analysis (~15 min)
-python seed_robustness_test.py  # Bootstrap stability (n=1000)
-```
-
 ---
 
 ## Screenshots
