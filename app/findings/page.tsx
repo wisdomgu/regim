@@ -1,5 +1,6 @@
 "use client";
 import { trackEvent } from "@/lib/trackEvent";
+import { useEffect } from "react";
 
 const FINDINGS = [
   {
