@@ -67,7 +67,7 @@ Live at [regim.vercel.app/dashboard](https://regim.vercel.app/dashboard). Suppor
 Yahoo Finance (yfinance)
         │
         ▼
-   data.py  ──────────────────────────────────────────────────────────┐
+   data.py  ───────────────────────────────────────────────────────────┐
         │                                                              │
         ▼                                                              ▼
   regime.py                                                    macro_attribution.py
