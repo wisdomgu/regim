@@ -1,4 +1,5 @@
 "use client";
+import { trackEvent } from "@/lib/trackEvent";
 
 const FINDINGS = [
   {
@@ -85,6 +86,11 @@ const CITATIONS = [
 ];
 
 export default function Research() {
+
+  useEffect(() => {
+    trackEvent({ tab: "findings" });
+  }, []);
+  
   return (
     <main>
       <div style={{ overflowY: "auto", height: "100vh" }}>
