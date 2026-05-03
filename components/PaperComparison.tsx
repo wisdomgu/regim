@@ -29,7 +29,7 @@ export default function PaperComparison({ regimeParams, backtestSaving, ticker }
 
       <div className="paper-context">
         <p className="text-sm text-blue-300">
-          The paper found that RL agents <span className="font-semibold">failed to exploit regime information</span> even
+          <a href="https://papers.ssrn.com/abstract=6559598">This paper</a> found that RL agents <span className="font-semibold">failed to exploit regime information</span> even
           when it was in their state — achieving WAP 1.0003 vs the hand-coded rule's 0.9949.
           This dashboard makes that regime signal <span className="font-semibold">explicit</span>, applying it directly on real {ticker} data.
         </p>
