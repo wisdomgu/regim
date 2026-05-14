@@ -1,13 +1,3 @@
----
-title: Regim Backend
-emoji: 📈
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # Regim
 > A quantitative finance research platform studying whether market regime signals
 > can improve trade execution, and the conditions under which they fail.
@@ -147,7 +137,7 @@ All endpoints accept `ticker` and `period` query params. Responses are cached.
 | Backend | FastAPI + Python 3.11 | 11 REST endpoints |
 | Frontend | Next.js 14, TypeScript | Dashboard |
 | Charts | Recharts | All visualizations |
-| Deployment | Vercel + Railway | Frontend + backend |
+| Deployment | Vercel + Hugging Face Spaces | Frontend + backend |
 
 ---
 
