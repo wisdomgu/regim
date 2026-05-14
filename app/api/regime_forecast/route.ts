@@ -2,8 +2,6 @@ export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { getCached, setCached } from "@/lib/cache";
 
-const BACKEND = process.env.BACKEND_URL ?? "${process.env.NEXT_PUBLIC_API_URL}";
-
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const ticker = searchParams.get("ticker") ?? "SPY";
@@ -15,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const res = await fetch(
-      `${BACKEND}/api/regime_forecast?ticker=${ticker}&period=${period}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/regime_forecast?ticker=${ticker}&period=${period}`,
       { cache: "no-store" }
     );
     if (!res.ok) {
