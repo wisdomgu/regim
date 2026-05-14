@@ -11,7 +11,7 @@ export async function GET(request: Request) {
 
   try {
     const res = await fetch(
-      `https://regim.onrender.com/api/regime/${ticker}?period=${period}`,
+      `https://regim.up.railway.app/api/regime/${ticker}?period=${period}`,
       { cache: "no-store" }
     );
     const data = await res.json();
