@@ -1,3 +1,13 @@
+---
+title: Regim Backend
+emoji: 📈
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Regim
 > A quantitative finance research platform studying whether market regime signals
 > can improve trade execution, and the conditions under which they fail.
