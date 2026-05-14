@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   if (cached) return Response.json(cached);
 
   try {
-    const backendUrl = `https://regim.up.railway.app/api/shap/${ticker}?period=${period}`;
+    const backendUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/shap/${ticker}?period=${period}`;
     console.log("Calling backend:", backendUrl);
 
     const res = await fetch(backendUrl, { cache: "no-store" });

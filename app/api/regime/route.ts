@@ -11,7 +11,7 @@ export async function GET(request: Request) {
 
   try {
     const res = await fetch(
-      `https://regim.up.railway.app/api/regime/${ticker}?period=${period}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/regime/${ticker}?period=${period}`,
       { cache: "no-store" }
     );
     const data = await res.json();

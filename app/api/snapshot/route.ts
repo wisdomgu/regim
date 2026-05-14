@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       key,
       async () => {
         const res = await fetch(
-          `https://regim.up.railway.app/api/snapshot/${ticker}?period=${period}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/snapshot/${ticker}?period=${period}`,
           { cache: "no-store" }
         );
         if (!res.ok) {

@@ -12,7 +12,7 @@ export async function GET(request: Request) {
       key,
       async () => {
         const res = await fetch(
-          `https://regim.up.railway.app/api/vol_forecast/${ticker}?period=${period}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/vol_forecast/${ticker}?period=${period}`,
           { cache: "no-store" }
         );
         if (!res.ok) throw new Error(`Backend ${res.status}`);

@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   
   try {
     const res = await fetch(
-      `https://regim.up.railway.app/api/intraday_backtest/${ticker}?period=${period}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/intraday_backtest/${ticker}?period=${period}`,
       { cache: "no-store" }
     );
     
