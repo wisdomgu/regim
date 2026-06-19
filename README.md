@@ -4,7 +4,6 @@
 
 **Live demo:** [regim-dashboard.vercel.app](https://regim-dashboard.vercel.app) &nbsp;·&nbsp;
 **Findings:** [regim-dashboard.vercel.app/findings](https://regim-dashboard.vercel.app/findings) &nbsp;·&nbsp;
-**Companion paper (SSRN, forthcoming):** *Temporal Aggregation Reveals HMM Regime Uncertainty Signals in Optimal Trade Execution*
 
 ---
 
