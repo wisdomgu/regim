@@ -9,7 +9,7 @@
 
 ## Eight Key Findings
 
-All reproducible from the live dashboard. Statistical tests: paired t-test, 1000-iteration permutation test, binomial test, Bonferroni corrected across simultaneous hypotheses.
+All reproducible from the live dashboard. Statistical tests: paired t-test, 1000-iteration permutation test, binomial test, Bonferroni corrected across simultaneous hypotheses. Estimates shift as the trailing window advances.
 
 | # | Finding | Evidence |
 |---|---------|----------|
@@ -31,10 +31,6 @@ All reproducible from the live dashboard. Statistical tests: paired t-test, 1000
 - BTC stay probability: ρ = −0.155 (p = 0.004, 100% of resamples negative)
 
 ---
-
-## Dashboard
-
-Live at [regim.vercel.app/dashboard](https://regim.vercel.app/dashboard). Supports 8 assets across 3 time periods and 3 execution profiles.
 
 **Assets:** SPY · QQQ · IWM (equity indices) · BTC · ETH (crypto) · GLD (commodity) · TLT (bonds) · AAPL (large-cap)
 
