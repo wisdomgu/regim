@@ -36,15 +36,15 @@
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| Regime detection | `hmmlearn` | 4-state Gaussian HMM |
+| Regime detection | `hmmlearn` | Used to develop 4-state Gaussian HMM |
 | Explainability | `shap` | KernelExplainer on HMM posteriors |
 | Changepoint detection | `ruptures` | PELT algorithm |
 | Volatility | `arch` | GARCH(1,1) per regime |
 | Macro data | `fredapi` | FRED API integration |
 | Backend | FastAPI + Python 3.11 | 11 REST endpoints |
-| Frontend | Next.js 14, TypeScript | Dashboard |
-| Charts | Recharts | All visualizations |
-| Deployment | Vercel + Hugging Face Spaces | Frontend + backend |
+| Frontend | Next.js 14, TypeScript | UI |
+| Charts | Recharts | All visualizations shown |
+| Deployment | Vercel & Hugging Face Spaces | Deployment of Frontend & backend respectively |
 
 ---
 
