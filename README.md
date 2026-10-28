@@ -32,26 +32,6 @@
 
 ---
 
-## API Endpoints
-
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/regime` | Current regime, posterior, transition matrix, SHAP values |
-| `GET /api/backtest` | Walk-forward OOS backtest vs TWAP with confidence filtering |
-| `GET /api/backtest_4state` | Per-regime performance breakdown |
-| `GET /api/changepoint` | PELT changepoints vs HMM Viterbi path with lead/lag table |
-| `GET /api/compare` | Cross-asset regime structure comparison |
-| `GET /api/intraday_backtest` | 6-tranche intraday IS improvement |
-| `GET /api/macro_attribution` | FRED macro correlations and logistic regression |
-| `GET /api/outcome` | Paper trading outcome resolution |
-| `GET /api/regime_forecast` | Regime probability evolution across horizons |
-| `GET /api/shap` | SHAP feature importance for regime classification |
-| `GET /api/vol_forecast` | Regime-conditional GARCH(1,1) vs unconditional |
-
-All endpoints accept `ticker` and `period` query params. Responses are cached.
-
----
-
 ## Stack
 
 | Layer | Technology | Purpose |
